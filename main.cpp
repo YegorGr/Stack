@@ -3,6 +3,7 @@
 #include <assert.h>
 #include <sys/types.h>
 
+#define TIGRAN "LOX"
 typedef double stackelem_t;
 
 enum ErrorsCode {
