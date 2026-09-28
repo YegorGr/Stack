@@ -42,18 +42,19 @@ struct stack_t {
     #endif
 };
 
-ErrorsCode  StackInit  (stack_t* stk, ssize_t capacity STACK_DEBUG(, const char* file, const char* name_stk,
+ErrorsCode  StackInit   (stack_t* stk, ssize_t capacity STACK_DEBUG(, const char* file, const char* name_stk,
                          const char* name_function, int line, const char* date, const char* time));
-ErrorsCode  StackPush  (stack_t* stk, stackelem_t value);
-stackelem_t StackPop   (stack_t* stk, ErrorsCode* err);
-ErrorsCode  StackOk    (stack_t* stk);
+ErrorsCode  StackPush   (stack_t* stk, stackelem_t value);
+stackelem_t StackPop    (stack_t* stk, ErrorsCode* err);
+ErrorsCode  StackOk     (stack_t* stk);
 
-void        StackDump  (stack_t* stk, ErrorsCode err);
-const char* GetErrorStr(ErrorsCode err);
+void        StackDump   (stack_t* stk, ErrorsCode err);
+const char* GetErrorStr (ErrorsCode err);
 
-ErrorsCode  ResizeUp   (stack_t* stk);
-ErrorsCode  ResizeDown (stack_t* stk);
+ErrorsCode  ResizeUp    (stack_t* stk);
+ErrorsCode  ResizeDown  (stack_t* stk);
 
+void        StackDestroy(stack_t* stk);
 
 int main()
 {
@@ -73,20 +74,18 @@ int main()
 
     assert_ok(&stk1);
 
-    StackPush(&stk1, number);
-    StackPush(&stk1, number);
-    StackPush(&stk1, number);
-    StackPush(&stk1, number);
-    StackPush(&stk1, number);
-    StackPush(&stk1, number);
-    StackPush(&stk1, number);
+    for (int i = 0; i < 1000; i++)
+        StackPush(&stk1, (double) i);
+    
+    double num = 0;
+    for (int i = 0; i < 900; i++)
+        num = StackPop(&stk1, &err);
 
-    double GG = StackPop(&stk1, &err);
     StackDump(&stk1, err);
 
     assert_ok(&stk1);
 
-    // StackDestroy(&stk1);
+    StackDestroy(&stk1);
 
     getchar();
 
@@ -98,15 +97,15 @@ ErrorsCode  StackInit  (stack_t* stk, ssize_t capacity STACK_DEBUG(, const char*
 {
     assert(stk);
 
-    STACK_DEBUG
-    (
+#ifdef STACK_DEBUG
         stk->file          = file;
         stk->name_stk      = name_stk;
         stk->name_function = name_function;
         stk->line          = line;
         stk->date          = date;
         stk->time          = time;
-    )
+#endif
+
     if (capacity <= 0) 
         return NEGATIVE_CAPACITY;
     
@@ -118,7 +117,7 @@ ErrorsCode  StackInit  (stack_t* stk, ssize_t capacity STACK_DEBUG(, const char*
     stk->capacity = capacity;
     stk->size     = 0;
 
-    for (size_t i = 0; i < capacity; i++) // memset
+    for (size_t i = 0; i < capacity; i++)
         stk->data[i] = POIZON;
 
     ErrorsCode err = StackOk(stk);
@@ -231,13 +230,13 @@ void StackDump (stack_t* stk, ErrorsCode err)
 
     fprintf(file, "\n\n===== OKAK (STACK DUMP) =====\n\n");
 
-    #ifdef ON_DEBUG
+#ifdef ON_DEBUG
     fprintf(file, "Date: %s, time: %s\n", stk->date, stk->time);
     fprintf(file, "File name:  [%s]\n", stk->file);
     fprintf(file, "Stack name: [%s]\n", stk->name_stk);
     fprintf(file, "Data type:  [%s]\n", STR_ELEM(TYPE_STK));
     fprintf(file, "Created in: [%s] (line %d)\n\n", stk->name_function, stk->line);
-    #endif
+#endif
 
     fprintf(file, "! Number of error: [#%d] -> (%s)\n\n", err, GetErrorStr(err));
 
@@ -253,8 +252,8 @@ void StackDump (stack_t* stk, ErrorsCode err)
         for ( ; i < stk->size; i++)
             fprintf(file, "* [%zd]: %lf\n", i, stk->data[i]);
         
-        for ( ; i <stk->capacity; i++)
-            fprintf(file, "  [%zd]: %lf (POIZON)\n", i, stk->data[i]);
+        for ( ; i < stk->capacity; i++)
+            fprintf(file, "  [%zd]: %lg (POIZON)\n", i, stk->data[i]);
     }  
     else
         fprintf(file, "Null data, there are NO elements\n");
@@ -295,4 +294,31 @@ const char* GetErrorStr (ErrorsCode err)
         assert(0);
         break;
     }
+}
+
+void StackDestroy (stack_t* stk)
+{
+
+    if (stk == NULL) 
+        return;
+
+    if (stk->data != NULL) 
+    {
+        for (ssize_t i = 0; i < stk->capacity; i++)
+            stk->data[i] = POIZON;
+        
+        free(stk->data);
+    }
+
+    stk->data          = NULL;
+    stk->size          = -1;
+    stk->capacity      = -1;
+
+#ifdef STACK_DEBUG
+    stk->file          = NULL;
+    stk->name_function = NULL;
+    stk->line          = -1;
+    stk->date          = NULL;
+    stk->time          = NULL;
+#endif
 }
