@@ -37,3 +37,80 @@ Capacity: 0
 Size: 0
 Data elements:
 Null data, there are NO elements
+
+
+===== OKAK (STACK DUMP) =====
+
+Stack name: main.cpp
+Created in: main.cpp (line 55)
+
+Number of error: [4]
+Capacity: 0
+Size: 0
+Data elements:
+Null data, there are NO elements
+
+
+===== OKAK (STACK DUMP) =====
+
+Stack name: main.cpp
+Created in: main.cpp (line 55)
+
+Number of error: [6]
+Capacity: 10
+Size: 6
+Data elements:
+[0]: 3.141593
+[1]: 3.141593
+[2]: 3.141593
+[3]: 3.141593
+[4]: 3.141593
+[5]: 3.141593
+[6]: 3.141593
+[7]: 1.#QNAN0
+[8]: 1.#QNAN0
+[9]: 1.#QNAN0
+
+
+===== OKAK (STACK DUMP) =====
+
+Date: DATû!	@DATû!	@DATû!	@DATû!	@DATû!	@DATû!	@DATû!	@, time: 18:38:30
+Stack name: main.cpp
+Created in: main (line 60)
+
+Number of error: [6]
+Capacity: 10
+Size: 6
+Data elements:
+[0]: 3.141593
+[1]: 3.141593
+[2]: 3.141593
+[3]: 3.141593
+[4]: 3.141593
+[5]: 3.141593
+[6]: 3.141593
+[7]: 1.#QNAN0
+[8]: 1.#QNAN0
+[9]: 1.#QNAN0
+
+
+===== OKAK (STACK DUMP) =====
+
+Date: DATû!	@DATû!	@DATû!	@DATû!	@DATû!	@DATû!	@DATû!	@, time: 18:39:58
+File name: main.cpp
+Created in: main (line 60)
+
+Number of error: [6]
+Capacity: 10
+Size: 6
+Data elements:
+[0]: 3.141593
+[1]: 3.141593
+[2]: 3.141593
+[3]: 3.141593
+[4]: 3.141593
+[5]: 3.141593
+[6]: 3.141593
+[7]: 1.#QNAN0
+[8]: 1.#QNAN0
+[9]: 1.#QNAN0

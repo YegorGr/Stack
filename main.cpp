@@ -31,26 +31,33 @@ struct stack_t {
 
     #ifdef STACK_DEBUG
     const char*  file;
+    const char*  name_function;
     int          line;
+    const char*  date;
+    const char*  time;
     #endif
 };
 
-ErrorsCode StackInit (stack_t* stk, ssize_t capacity STACK_DEBUG(, const char* file, int line));
-ErrorsCode StackPush (stack_t* stk, stackelem_t value);
-ErrorsCode StackOk   (stack_t* stk);
-void       StackDump (stack_t* stk, ErrorsCode err);
+ErrorsCode  StackInit  (stack_t* stk, ssize_t capacity STACK_DEBUG(, const char* file,
+                         const char* name_function, int line, const char* date, const char* time));
+ErrorsCode  StackPush  (stack_t* stk, stackelem_t value);
+stackelem_t StackPop   (stack_t* stk, ErrorsCode* err);
+ErrorsCode  StackOk    (stack_t* stk);
+void        StackDump  (stack_t* stk, ErrorsCode err);
 
-ErrorsCode ResizeUp  (stack_t* stk);
+ErrorsCode  ResizeUp   (stack_t* stk);
+ErrorsCode  ResizeDown (stack_t* stk);
 
 
 int main()
 {
     stack_t stk1 = {};
 
-    ssize_t capacity = -1;
+    ssize_t capacity = 5;
     double number = 3.1415926535;
 
-    ErrorsCode err = StackInit(&stk1, capacity STACK_DEBUG(, __FILE__, __LINE__));
+    ErrorsCode err = StackInit(&stk1, capacity STACK_DEBUG(, __FILE__, __FUNCTION__, 
+                                                            __LINE__, __DATE__, __TIME__));
 
     if (err != IS_OK)
     {
@@ -61,6 +68,14 @@ int main()
     assert_ok(&stk1);
 
     StackPush(&stk1, number);
+    StackPush(&stk1, number);
+    StackPush(&stk1, number);
+    StackPush(&stk1, number);
+    StackPush(&stk1, number);
+    StackPush(&stk1, number);
+    StackPush(&stk1, number);
+
+    double GG = StackPop(&stk1, &err);
     StackDump(&stk1, err);
 
     assert_ok(&stk1);
@@ -72,14 +87,18 @@ int main()
     return 0;
 }
 
-ErrorsCode StackInit (stack_t* stk, ssize_t capacity STACK_DEBUG(, const char* file, int line))
+ErrorsCode  StackInit  (stack_t* stk, ssize_t capacity STACK_DEBUG(, const char* file,
+                         const char* name_function, int line, const char* date, const char* time))
 {
     assert(stk);
 
     STACK_DEBUG
     (
-        stk->file = file;
-        stk->line = line;
+        stk->file          = file;
+        stk->name_function = name_function;
+        stk->line          = line;
+        stk->date          = date;
+        stk->time          = time;
     )
     if (capacity <= 0) 
         return NEGATIVE_CAPACITY;
@@ -114,6 +133,22 @@ ErrorsCode StackPush (stack_t* stk, stackelem_t value)
     assert_ok(stk);
 
     return IS_OK;
+}
+
+stackelem_t StackPop (stack_t* stk, ErrorsCode* err)
+{
+    assert_ok(stk);
+
+    stackelem_t value = POIZON;
+
+    value = stk->data[stk->size--];
+
+    if (stk->size * 4 <= stk->capacity)
+        *err = ResizeDown(stk);
+
+    assert_ok(stk);
+    
+    return value;
 }
 
 ErrorsCode StackOk(stack_t* stk)
@@ -162,6 +197,23 @@ ErrorsCode ResizeUp (stack_t* stk)
     return IS_OK;
 }
 
+ErrorsCode ResizeDown (stack_t* stk)
+{
+    assert_ok(stk);
+
+    ssize_t new_capacity = stk->capacity / 4;
+
+    stackelem_t* new_data = (stackelem_t*) realloc(stk->data, new_capacity * sizeof(stackelem_t));
+    
+    if (new_data == NULL)
+        return ERROR_NO_MEMORY;
+    
+    stk->capacity = new_capacity;
+    stk->data     = new_data;
+
+    return IS_OK;
+}
+
 void StackDump (stack_t* stk, ErrorsCode err)
 {
     const char* filename = "logs.txt";
@@ -171,8 +223,9 @@ void StackDump (stack_t* stk, ErrorsCode err)
     fprintf(file, "\n\n===== OKAK (STACK DUMP) =====\n\n");
 
     #ifdef ON_DEBUG
-    fprintf(file, "Stack name: %s\n", stk->file);
-    fprintf(file, "Created in: %s (line %d)\n\n", stk->file, stk->line);
+    fprintf(file, "Date: %s, time: %s\n", stk->data, stk->time);
+    fprintf(file, "File name: %s\n", stk->file);
+    fprintf(file, "Created in: %s (line %d)\n\n", stk->name_function, stk->line);
     #endif
 
     fprintf(file, "Number of error: [%d]\n", err);
@@ -180,7 +233,7 @@ void StackDump (stack_t* stk, ErrorsCode err)
     fprintf(file, "Size: %d\n", stk->size);
 
     fprintf(file, "Data elements:\n");
-
+    
     if (stk->data != NULL)
     {
         for (ssize_t i = 0; i < stk->capacity; i++)
@@ -191,12 +244,4 @@ void StackDump (stack_t* stk, ErrorsCode err)
 
     fclose(file);
 }
-/*
-int ResizeDown (stack_t* stk)
-{
-    int err = StackOk(&stk);
-
-    ssize_t new 
-}
-*/
 
