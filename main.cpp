@@ -244,7 +244,7 @@ void StackDump (stack_t* stk, ErrorsCode err)
     fprintf(file, "Size: %d\n\n", stk->size);
 
     fprintf(file, "* Data elements:\n");
-    fprintf(file, "%s data[%d] {\n", STR_ELEM(TYPE_STK), stk->capacity);
+    fprintf(file, "%s data[%d] (%p) {\n", STR_ELEM(TYPE_STK), stk->capacity, &stk->data);
 
     if (stk->data != NULL)
     {
