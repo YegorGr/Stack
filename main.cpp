@@ -8,7 +8,10 @@
 #define POIZON NAN
 const size_t stack_min_size = 10;
 
-typedef double stackelem_t;
+#define TYPE_STK double
+#define TYPE_TO_STR(x) #x
+#define STR_ELEM(x) TYPE_TO_STR(x)
+typedef TYPE_STK stackelem_t;
 
 enum ErrorsCode {
     IS_OK = 0,
@@ -31,6 +34,7 @@ struct stack_t {
 
     #ifdef STACK_DEBUG
     const char*  file;
+    const char*  name_stk;
     const char*  name_function;
     int          line;
     const char*  date;
@@ -38,7 +42,7 @@ struct stack_t {
     #endif
 };
 
-ErrorsCode  StackInit  (stack_t* stk, ssize_t capacity STACK_DEBUG(, const char* file,
+ErrorsCode  StackInit  (stack_t* stk, ssize_t capacity STACK_DEBUG(, const char* file, const char* name_stk,
                          const char* name_function, int line, const char* date, const char* time));
 ErrorsCode  StackPush  (stack_t* stk, stackelem_t value);
 stackelem_t StackPop   (stack_t* stk, ErrorsCode* err);
@@ -58,7 +62,7 @@ int main()
     ssize_t capacity = 5;
     double number = 3.1415926535;
 
-    ErrorsCode err = StackInit(&stk1, capacity STACK_DEBUG(, __FILE__, __FUNCTION__, 
+    ErrorsCode err = StackInit(&stk1, capacity STACK_DEBUG(, __FILE__, "stk1", __FUNCTION__, 
                                                             __LINE__, __DATE__, __TIME__));
 
     if (err != IS_OK)
@@ -89,7 +93,7 @@ int main()
     return 0;
 }
 
-ErrorsCode  StackInit  (stack_t* stk, ssize_t capacity STACK_DEBUG(, const char* file,
+ErrorsCode  StackInit  (stack_t* stk, ssize_t capacity STACK_DEBUG(, const char* file, const char* name_stk,
                          const char* name_function, int line, const char* date, const char* time))
 {
     assert(stk);
@@ -97,6 +101,7 @@ ErrorsCode  StackInit  (stack_t* stk, ssize_t capacity STACK_DEBUG(, const char*
     STACK_DEBUG
     (
         stk->file          = file;
+        stk->name_stk      = name_stk;
         stk->name_function = name_function;
         stk->line          = line;
         stk->date          = date;
@@ -228,8 +233,10 @@ void StackDump (stack_t* stk, ErrorsCode err)
 
     #ifdef ON_DEBUG
     fprintf(file, "Date: %s, time: %s\n", stk->date, stk->time);
-    fprintf(file, "File name: %s\n", stk->file);
-    fprintf(file, "Created in: %s (line %d)\n\n", stk->name_function, stk->line);
+    fprintf(file, "File name:  [%s]\n", stk->file);
+    fprintf(file, "Stack name: [%s]\n", stk->name_stk);
+    fprintf(file, "Data type:  [%s]\n", STR_ELEM(TYPE_STK));
+    fprintf(file, "Created in: [%s] (line %d)\n\n", stk->name_function, stk->line);
     #endif
 
     fprintf(file, "! Number of error: [#%d] -> (%s)\n\n", err, GetErrorStr(err));
@@ -237,16 +244,22 @@ void StackDump (stack_t* stk, ErrorsCode err)
     fprintf(file, "Capacity: %d\n", stk->capacity);
     fprintf(file, "Size: %d\n\n", stk->size);
 
-    fprintf(file, "(*) Data elements:\n");
+    fprintf(file, "* Data elements:\n");
+    fprintf(file, "%s data[%d] {\n", STR_ELEM(TYPE_STK), stk->capacity);
 
     if (stk->data != NULL)
     {
-        for (ssize_t i = 0; i < stk->capacity; i++)
-            fprintf(file, "[%zd]: %lf\n", i, stk->data[i]);
-    }
+        ssize_t i = 0;
+        for ( ; i < stk->size; i++)
+            fprintf(file, "* [%zd]: %lf\n", i, stk->data[i]);
+        
+        for ( ; i <stk->capacity; i++)
+            fprintf(file, "  [%zd]: %lf (POIZON)\n", i, stk->data[i]);
+    }  
     else
         fprintf(file, "Null data, there are NO elements\n");
 
+    fprintf(file, "}");
     fclose(file);
 }
 

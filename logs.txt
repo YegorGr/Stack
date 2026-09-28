@@ -428,3 +428,366 @@ Size: 6
 [7]: 1.#QNAN0
 [8]: 1.#QNAN0
 [9]: 1.#QNAN0
+
+
+===== OKAK (STACK DUMP) =====
+
+Date: Sep 28 2026, time: 21:44:17
+File name: main.cpp
+Created in: main (line 62)
+
+! Number of error: [#0] -> (Stack is okey! Good job my bruh :))
+
+Capacity: 10
+Size: 6
+
+(*) Data elements:
+[0]: 3.141593
+[1]: 3.141593
+[2]: 3.141593
+[3]: 3.141593
+[4]: 3.141593
+[5]: 3.141593
+[6]: 1.#QNAN0
+[7]: 1.#QNAN0
+[8]: 1.#QNAN0
+[9]: 1.#QNAN0
+
+
+===== OKAK (STACK DUMP) =====
+
+Date: Sep 28 2026, time: 21:57:28
+File name: main.cpp
+Stack name: stk1Created in: main (line 63)
+
+! Number of error: [#0] -> (Stack is okey! Good job my bruh :))
+
+Capacity: 10
+Size: 6
+
+(*) Data elements:
+[0]: 3.141593
+[1]: 3.141593
+[2]: 3.141593
+[3]: 3.141593
+[4]: 3.141593
+[5]: 3.141593
+[6]: 1.#QNAN0
+[7]: 1.#QNAN0
+[8]: 1.#QNAN0
+[9]: 1.#QNAN0
+
+
+===== OKAK (STACK DUMP) =====
+
+Date: Sep 28 2026, time: 21:57:28
+File name: main.cpp
+Stack name: stk1Created in: main (line 63)
+
+! Number of error: [#0] -> (Stack is okey! Good job my bruh :))
+
+Capacity: 10
+Size: 6
+
+(*) Data elements:
+[0]: 3.141593
+[1]: 3.141593
+[2]: 3.141593
+[3]: 3.141593
+[4]: 3.141593
+[5]: 3.141593
+[6]: 1.#QNAN0
+[7]: 1.#QNAN0
+[8]: 1.#QNAN0
+[9]: 1.#QNAN0
+
+
+===== OKAK (STACK DUMP) =====
+
+Date: Sep 28 2026, time: 21:58:33
+File name: [main.cpp]
+Stack name: [stk1]
+Created in: [main] (line 63)
+
+! Number of error: [#0] -> (Stack is okey! Good job my bruh :))
+
+Capacity: 10
+Size: 6
+
+(*) Data elements:
+[0]: 3.141593
+[1]: 3.141593
+[2]: 3.141593
+[3]: 3.141593
+[4]: 3.141593
+[5]: 3.141593
+[6]: 1.#QNAN0
+[7]: 1.#QNAN0
+[8]: 1.#QNAN0
+[9]: 1.#QNAN0
+
+
+===== OKAK (STACK DUMP) =====
+
+Date: Sep 28 2026, time: 22:01:10
+File name: [main.cpp]
+Stack name: [stk1]
+Created in: [main] (line 63)
+
+! Number of error: [#0] -> (Stack is okey! Good job my bruh :))
+
+Capacity: 10
+Size: 6
+
+(*) Data elements:
+* [0]: 3.141593
+* [1]: 3.141593
+* [2]: 3.141593
+* [3]: 3.141593
+* [4]: 3.141593
+* [5]: 3.141593
+* [6]: 1.#QNAN0
+  [7]: 1.#QNAN0
+  [8]: 1.#QNAN0
+  [9]: 1.#QNAN0
+
+
+===== OKAK (STACK DUMP) =====
+
+Date: Sep 28 2026, time: 22:01:28
+File name: [main.cpp]
+Stack name: [stk1]
+Created in: [main] (line 63)
+
+! Number of error: [#0] -> (Stack is okey! Good job my bruh :))
+
+Capacity: 10
+Size: 6
+
+(*) Data elements:
+* [0]: 3.141593
+* [1]: 3.141593
+* [2]: 3.141593
+* [3]: 3.141593
+* [4]: 3.141593
+* [5]: 3.141593
+  [6]: 1.#QNAN0
+  [7]: 1.#QNAN0
+  [8]: 1.#QNAN0
+  [9]: 1.#QNAN0
+
+
+===== OKAK (STACK DUMP) =====
+
+Date: Sep 28 2026, time: 22:13:50
+File name: [main.cpp]
+Stack name: [stk1]
+Data type: [TYPE_STK]Created in: [main] (line 66)
+
+! Number of error: [#0] -> (Stack is okey! Good job my bruh :))
+
+Capacity: 10
+Size: 6
+
+* Data elements:
+
+* [0]: 3.141593
+* [1]: 3.141593
+* [2]: 3.141593
+* [3]: 3.141593
+* [4]: 3.141593
+* [5]: 3.141593
+  [6]: 1.#QNAN0 (POIZON)
+  [7]: 1.#QNAN0 (POIZON)
+  [8]: 1.#QNAN0 (POIZON)
+  [9]: 1.#QNAN0 (POIZON)
+
+
+===== OKAK (STACK DUMP) =====
+
+Date: Sep 28 2026, time: 22:14:34
+File name: [main.cpp]
+Stack name: [stk1]
+Data type: [TYPE_STK]
+Created in: [main] (line 66)
+
+! Number of error: [#0] -> (Stack is okey! Good job my bruh :))
+
+Capacity: 10
+Size: 6
+
+* Data elements:
+
+* [0]: 3.141593
+* [1]: 3.141593
+* [2]: 3.141593
+* [3]: 3.141593
+* [4]: 3.141593
+* [5]: 3.141593
+  [6]: 1.#QNAN0 (POIZON)
+  [7]: 1.#QNAN0 (POIZON)
+  [8]: 1.#QNAN0 (POIZON)
+  [9]: 1.#QNAN0 (POIZON)
+
+
+===== OKAK (STACK DUMP) =====
+
+Date: Sep 28 2026, time: 22:30:14
+File name: [main.cpp]
+Stack name: [stk1]
+Data type: [double]
+Created in: [main] (line 66)
+
+! Number of error: [#0] -> (Stack is okey! Good job my bruh :))
+
+Capacity: 10
+Size: 6
+
+* Data elements:
+
+* [0]: 3.141593
+* [1]: 3.141593
+* [2]: 3.141593
+* [3]: 3.141593
+* [4]: 3.141593
+* [5]: 3.141593
+  [6]: 1.#QNAN0 (POIZON)
+  [7]: 1.#QNAN0 (POIZON)
+  [8]: 1.#QNAN0 (POIZON)
+  [9]: 1.#QNAN0 (POIZON)
+
+
+===== OKAK (STACK DUMP) =====
+
+Date: Sep 28 2026, time: 22:30:46
+File name:  [main.cpp]
+Stack name: [stk1]
+Data type:  [double]
+Created in: [main] (line 66)
+
+! Number of error: [#0] -> (Stack is okey! Good job my bruh :))
+
+Capacity: 10
+Size: 6
+
+* Data elements:
+
+* [0]: 3.141593
+* [1]: 3.141593
+* [2]: 3.141593
+* [3]: 3.141593
+* [4]: 3.141593
+* [5]: 3.141593
+  [6]: 1.#QNAN0 (POIZON)
+  [7]: 1.#QNAN0 (POIZON)
+  [8]: 1.#QNAN0 (POIZON)
+  [9]: 1.#QNAN0 (POIZON)
+
+
+===== OKAK (STACK DUMP) =====
+
+Date: Sep 28 2026, time: 22:32:14
+File name:  [main.cpp]
+Stack name: [stk1]
+Data type:  [double]
+Created in: [main] (line 66)
+
+! Number of error: [#0] -> (Stack is okey! Good job my bruh :))
+
+Capacity: 10
+Size: 6
+
+* Data elements:
+double data {
+* [0]: 3.141593
+* [1]: 3.141593
+* [2]: 3.141593
+* [3]: 3.141593
+* [4]: 3.141593
+* [5]: 3.141593
+  [6]: 1.#QNAN0 (POIZON)
+  [7]: 1.#QNAN0 (POIZON)
+  [8]: 1.#QNAN0 (POIZON)
+  [9]: 1.#QNAN0 (POIZON)
+}
+
+===== OKAK (STACK DUMP) =====
+
+Date: Sep 28 2026, time: 22:33:16
+File name:  [main.cpp]
+Stack name: [stk1]
+Data type:  [double]
+Created in: [main] (line 66)
+
+! Number of error: [#0] -> (Stack is okey! Good job my bruh :))
+
+Capacity: 10
+Size: 6
+
+* Data elements:
+double data[10] {
+* [0]: 3.141593
+* [1]: 3.141593
+* [2]: 3.141593
+* [3]: 3.141593
+* [4]: 3.141593
+* [5]: 3.141593
+  [6]: 1.#QNAN0 (POIZON)
+  [7]: 1.#QNAN0 (POIZON)
+  [8]: 1.#QNAN0 (POIZON)
+  [9]: 1.#QNAN0 (POIZON)
+}
+
+===== OKAK (STACK DUMP) =====
+
+Date: Sep 28 2026, time: 22:36:59
+File name:  [main.cpp]
+Stack name: [stk1]
+Data type:  [double]
+Created in: [main] (line 66)
+
+! Number of error: [#0] -> (Stack is okey! Good job my bruh :))
+
+Capacity: 10
+Size: 6
+
+* Data elements:
+double data[10] {
+[0]: 3.141593
+[1]: 3.141593
+[2]: 3.141593
+[3]: 3.141593
+[4]: 3.141593
+[5]: 3.141593
+[6]: NAN (POIZON)
+[7]: NAN (POIZON)
+[8]: NAN (POIZON)
+[9]: NAN (POIZON)
+}
+
+===== OKAK (STACK DUMP) =====
+
+Date: Sep 28 2026, time: 22:37:32
+File name:  [main.cpp]
+Stack name: [stk1]
+Data type:  [double]
+Created in: [main] (line 66)
+
+! Number of error: [#0] -> (Stack is okey! Good job my bruh :))
+
+Capacity: 10
+Size: 6
+
+* Data elements:
+double data[10] {
+* [0]: 3.141593
+* [1]: 3.141593
+* [2]: 3.141593
+* [3]: 3.141593
+* [4]: 3.141593
+* [5]: 3.141593
+  [6]: 1.#QNAN0 (POIZON)
+  [7]: 1.#QNAN0 (POIZON)
+  [8]: 1.#QNAN0 (POIZON)
+  [9]: 1.#QNAN0 (POIZON)
+}
