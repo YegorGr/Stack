@@ -43,7 +43,9 @@ ErrorsCode  StackInit  (stack_t* stk, ssize_t capacity STACK_DEBUG(, const char*
 ErrorsCode  StackPush  (stack_t* stk, stackelem_t value);
 stackelem_t StackPop   (stack_t* stk, ErrorsCode* err);
 ErrorsCode  StackOk    (stack_t* stk);
+
 void        StackDump  (stack_t* stk, ErrorsCode err);
+const char* GetErrorStr(ErrorsCode err);
 
 ErrorsCode  ResizeUp   (stack_t* stk);
 ErrorsCode  ResizeDown (stack_t* stk);
@@ -141,7 +143,9 @@ stackelem_t StackPop (stack_t* stk, ErrorsCode* err)
 
     stackelem_t value = POIZON;
 
-    value = stk->data[stk->size--];
+    value = stk->data[--stk->size];
+
+    stk->data[stk->size] = POIZON;
 
     if (stk->size * 4 <= stk->capacity)
         *err = ResizeDown(stk);
@@ -223,17 +227,18 @@ void StackDump (stack_t* stk, ErrorsCode err)
     fprintf(file, "\n\n===== OKAK (STACK DUMP) =====\n\n");
 
     #ifdef ON_DEBUG
-    fprintf(file, "Date: %s, time: %s\n", stk->data, stk->time);
+    fprintf(file, "Date: %s, time: %s\n", stk->date, stk->time);
     fprintf(file, "File name: %s\n", stk->file);
     fprintf(file, "Created in: %s (line %d)\n\n", stk->name_function, stk->line);
     #endif
 
-    fprintf(file, "Number of error: [%d]\n", err);
+    fprintf(file, "! Number of error: [#%d] -> (%s)\n\n", err, GetErrorStr(err));
+
     fprintf(file, "Capacity: %d\n", stk->capacity);
-    fprintf(file, "Size: %d\n", stk->size);
+    fprintf(file, "Size: %d\n\n", stk->size);
 
     fprintf(file, "Data elements:\n");
-    
+
     if (stk->data != NULL)
     {
         for (ssize_t i = 0; i < stk->capacity; i++)
@@ -245,3 +250,36 @@ void StackDump (stack_t* stk, ErrorsCode err)
     fclose(file);
 }
 
+const char* GetErrorStr (ErrorsCode err)
+{
+    switch (err)
+    {
+    case IS_OK:
+        return "Stack is okey! Good job my bruh :)";
+    
+    case PTR_STK_NULL:
+        return "Stack (struct) address is NULL";
+    
+    case PTR_DATA_NULL:
+        return "Data (stackelem_t) adress is NULL";
+    
+    case NEGATIVE_SIZE:
+        return "The pointer (size) to the element is negative";
+    
+    case NEGATIVE_CAPACITY:
+        return "Capacity of data is negative";
+    
+    case SIZE_BIGGER_CAPACITY:
+        return "The pointer (size) to an element larger than the data capacity";
+    
+    case ARRAY_CRASH:
+        return "The array contains extraneous (random) numbers";
+
+    case ERROR_NO_MEMORY:
+        return "Memory allocation error";
+    
+    default:
+        assert(0);
+        break;
+    }
+}
