@@ -1,0 +1,39 @@
+===== OKAK (STACK DUMP) =====
+
+Stack name: (null)
+Created in: (null) (line 0)
+
+Capacity: 0
+Size: 0
+Data elements:
+===== OKAK (STACK DUMP) =====
+
+Stack name: main.cpp
+Created in: main.cpp (line 53)
+
+Number of error: [4]Capacity: 0
+Size: 0
+Data elements:
+
+
+===== OKAK (STACK DUMP) =====
+
+Stack name: main.cpp
+Created in: main.cpp (line 53)
+
+Number of error: [4]
+Capacity: 0d
+Size: 0
+Data elements:
+
+
+===== OKAK (STACK DUMP) =====
+
+Stack name: main.cpp
+Created in: main.cpp (line 53)
+
+Number of error: [4]
+Capacity: 0
+Size: 0
+Data elements:
+Null data, there are NO elements
