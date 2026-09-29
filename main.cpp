@@ -248,17 +248,19 @@ void StackDump (stack_t* stk, ErrorsCode err)
 
     if (stk->data != NULL)
     {
-        ssize_t i = 0;
-        for ( ; i < stk->size; i++)
-            fprintf(file, "* [%zd]: %lf\n", i, stk->data[i]);
-        
-        for ( ; i < stk->capacity; i++)
-            fprintf(file, "  [%zd]: %lg (POIZON)\n", i, stk->data[i]);
-    }  
+        for (ssize_t i = 0; i < stk->capacity; i++)
+        {
+            if (!isnan(stk->data[i]))
+                fprintf(file, "* [%zd]: %lf\n", i, stk->data[i]);
+            else
+                fprintf(file, "  [%zd]: %lg (POIZON)\n", i, stk->data[i]);
+        }
+    }
     else
         fprintf(file, "Null data, there are NO elements\n");
 
     fprintf(file, "}");
+    
     fclose(file);
 }
 
