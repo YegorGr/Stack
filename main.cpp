@@ -6,11 +6,11 @@
 #include <string.h>
 
 #define POIZON NAN
-const size_t stack_min_size = 10;
 
 #define TYPE_STK double
 #define TYPE_TO_STR(x) #x
 #define STR_ELEM(x) TYPE_TO_STR(x)
+
 typedef TYPE_STK stackelem_t;
 
 enum ErrorsCode {
@@ -32,14 +32,14 @@ struct stack_t {
     ssize_t      size;
     ssize_t      capacity;
 
-    #ifdef STACK_DEBUG
+#ifdef STACK_DEBUG
     const char*  file;
     const char*  name_stk;
     const char*  name_function;
     int          line;
     const char*  date;
     const char*  time;
-    #endif
+#endif
 };
 
 ErrorsCode  StackInit   (stack_t* stk, ssize_t capacity STACK_DEBUG(, const char* file, const char* name_stk,
@@ -78,7 +78,7 @@ int main()
         StackPush(&stk1, (double) i);
     
     double num = 0;
-    for (int i = 0; i < 900; i++)
+    for (int i = 0; i < 981; i++)
         num = StackPop(&stk1, &err);
 
     StackDump(&stk1, err);
@@ -241,7 +241,7 @@ void StackDump (stack_t* stk, ErrorsCode err)
     fprintf(file, "! Number of error: [#%d] -> (%s)\n\n", err, GetErrorStr(err));
 
     fprintf(file, "Capacity: %d\n", stk->capacity);
-    fprintf(file, "Size: %d\n\n", stk->size);
+    fprintf(file, "Size:     %d\n\n", stk->size);
 
     fprintf(file, "* Data elements:\n");
     fprintf(file, "%s data[%d] (%p) {\n", STR_ELEM(TYPE_STK), stk->capacity, &stk->data);
