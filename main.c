@@ -66,7 +66,7 @@ ErrorsCode  StackInit  (stack_t* stk, ssize_t capacity STACK_DEBUG(, const char*
     stk->size          = 1;             // по data[0] лежит canary_detection
     stk->real_capacity = capacity + 2;
 
-    for (size_t i = 1; i < stk->real_capacity - 1; i++)
+    for (ssize_t i = 1; i < stk->real_capacity - 1; i++)
         stk->data[i] = POIZON;
 
     stk->data[0]                      = CANARY;
@@ -167,7 +167,7 @@ ErrorsCode ResizeUp (stack_t* stk)
     stk->data          = new_data;
     stk->real_capacity = new_capacity + 2;
 
-    for (size_t i = stk->size; i < stk->real_capacity - 1; i++)
+    for (ssize_t i = stk->size; i < stk->real_capacity - 1; i++)
         stk->data[i] = POIZON;
 
     stk->data[stk->real_capacity - 1] = CANARY;
