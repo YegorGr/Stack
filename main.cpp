@@ -6,6 +6,7 @@
 #include <string.h>
 
 #define POIZON NAN
+#define CANARY -3.1415926535
 
 #define TYPE_STK double
 #define TYPE_TO_STR(x) #x
@@ -21,7 +22,9 @@ enum ErrorsCode {
     NEGATIVE_CAPACITY,
     SIZE_BIGGER_CAPACITY,
     ARRAY_CRASH,
-    ERROR_NO_MEMORY
+    ERROR_NO_MEMORY,
+    STACK_UNDERFLOW,
+    CANARY_ERROR
 }; 
 
 #define ON_DEBUG
@@ -31,6 +34,7 @@ struct stack_t {
     stackelem_t* data;
     ssize_t      size;
     ssize_t      capacity;
+    ssize_t      real_capacity;
 
 #ifdef STACK_DEBUG
     const char*  file;
@@ -42,7 +46,8 @@ struct stack_t {
 #endif
 };
 
-ErrorsCode  StackInit   (stack_t* stk, ssize_t capacity STACK_DEBUG(, const char* file, const char* name_stk,
+ErrorsCode  StackInit   (stack_t* stk, ssize_t capacity
+                         STACK_DEBUG(, const char* file, const char* name_stk,
                          const char* name_function, int line, const char* date, const char* time));
 ErrorsCode  StackPush   (stack_t* stk, stackelem_t value);
 stackelem_t StackPop    (stack_t* stk, ErrorsCode* err);
@@ -61,7 +66,7 @@ int main()
     stack_t stk1 = {};
 
     ssize_t capacity = 5;
-    double number = 3.1415926535;
+    double number    = 3.1415926535;
 
     ErrorsCode err = StackInit(&stk1, capacity STACK_DEBUG(, __FILE__, "stk1", __FUNCTION__, 
                                                             __LINE__, __DATE__, __TIME__));
@@ -109,16 +114,20 @@ ErrorsCode  StackInit  (stack_t* stk, ssize_t capacity STACK_DEBUG(, const char*
     if (capacity <= 0) 
         return NEGATIVE_CAPACITY;
     
-    stk->data = (stackelem_t*) calloc(capacity, sizeof(stackelem_t));
+    stk->data = (stackelem_t*) calloc(capacity + 2, sizeof(stackelem_t));
 
     if (stk->data == NULL) 
         return ERROR_NO_MEMORY;
 
-    stk->capacity = capacity;
-    stk->size     = 0;
+    stk->capacity      = capacity;
+    stk->size          = 1;             // по data[0] лежит canary_detection
+    stk->real_capacity = capacity + 2;
 
-    for (size_t i = 0; i < capacity; i++)
+    for (size_t i = 1; i < stk->real_capacity - 1; i++)
         stk->data[i] = POIZON;
+
+    stk->data[0]                      = CANARY;
+    stk->data[stk->real_capacity - 1] = CANARY;
 
     ErrorsCode err = StackOk(stk);
     if (err != IS_OK) 
@@ -145,6 +154,12 @@ stackelem_t StackPop (stack_t* stk, ErrorsCode* err)
 {
     assert_ok(stk);
 
+    if (stk->size <= 1) 
+    {
+        *err = STACK_UNDERFLOW;
+        return POIZON;
+    }
+
     stackelem_t value = POIZON;
 
     value = stk->data[--stk->size];
@@ -167,7 +182,7 @@ ErrorsCode StackOk(stack_t* stk)
     if (stk->data == NULL)
         return PTR_DATA_NULL;
 
-    if (stk->size < 0)
+    if (stk->size < 1)
         return NEGATIVE_SIZE;
     
     if (stk->capacity < 0)
@@ -176,7 +191,10 @@ ErrorsCode StackOk(stack_t* stk)
     if (stk->size > stk->capacity)
         return SIZE_BIGGER_CAPACITY;
     
-    for (int i = 0; i < (stk->capacity - stk->size); i++)
+    if (stk->data[0] != CANARY || stk->data[stk->real_capacity - 1] != CANARY)
+        return CANARY_ERROR;
+    
+    for (int i = 0; i < (stk->real_capacity - 1 - stk->size); i++)
     {
         if (!isnan(stk->data[stk->size + i]))
             return ARRAY_CRASH;
@@ -188,19 +206,22 @@ ErrorsCode StackOk(stack_t* stk)
 ErrorsCode ResizeUp (stack_t* stk)
 {
     assert_ok(stk);
-
+    
     ssize_t new_capacity = stk->capacity * 2;
 
-    stackelem_t* new_data = (stackelem_t*) realloc(stk->data, new_capacity * sizeof(stackelem_t));
+    stackelem_t* new_data = (stackelem_t*) realloc(stk->data, (new_capacity + 2) * sizeof(stackelem_t));
     
     if (new_data == NULL)
         return ERROR_NO_MEMORY;
     
-    stk->capacity = new_capacity;
-    stk->data     = new_data;
+    stk->capacity      = new_capacity;
+    stk->data          = new_data;
+    stk->real_capacity = new_capacity + 2;
 
-    for (size_t i = stk->size; i < stk->capacity; i++)
+    for (size_t i = stk->size; i < stk->real_capacity - 1; i++)
         stk->data[i] = POIZON;
+
+    stk->data[stk->real_capacity - 1] = CANARY;
 
     return IS_OK;
 }
@@ -209,15 +230,18 @@ ErrorsCode ResizeDown (stack_t* stk)
 {
     assert_ok(stk);
 
-    ssize_t new_capacity = stk->capacity / 4;
+    ssize_t new_capacity = stk->capacity / 2;
 
-    stackelem_t* new_data = (stackelem_t*) realloc(stk->data, new_capacity * sizeof(stackelem_t));
+    stackelem_t* new_data = (stackelem_t*) realloc(stk->data, (new_capacity + 2) * sizeof(stackelem_t));
     
     if (new_data == NULL)
         return ERROR_NO_MEMORY;
     
-    stk->capacity = new_capacity;
-    stk->data     = new_data;
+    stk->capacity      = new_capacity;
+    stk->data          = new_data;
+    stk->real_capacity = new_capacity + 2;
+
+    stk->data[stk->real_capacity - 1] = CANARY;
 
     return IS_OK;
 }
@@ -240,20 +264,23 @@ void StackDump (stack_t* stk, ErrorsCode err)
 
     fprintf(file, "! Number of error: [#%d] -> (%s)\n\n", err, GetErrorStr(err));
 
-    fprintf(file, "Capacity: %d\n", stk->capacity);
-    fprintf(file, "Size:     %d\n\n", stk->size);
+    fprintf(file, "Capacity:      %d\n",   stk->capacity);
+    fprintf(file, "Real capacity: %d\n",   stk->real_capacity);
+    fprintf(file, "Size:          %d\n\n", stk->size);
 
     fprintf(file, "* Data elements:\n");
     fprintf(file, "%s data[%d] (%p) {\n", STR_ELEM(TYPE_STK), stk->capacity, &stk->data);
 
     if (stk->data != NULL)
     {
-        for (ssize_t i = 0; i < stk->capacity; i++)
+        for (ssize_t i = 0; i < stk->real_capacity; i++)
         {
-            if (!isnan(stk->data[i]))
+            if (!isnan(stk->data[i]) && stk->data[i] != CANARY)
                 fprintf(file, "* [%zd]: %lf\n", i, stk->data[i]);
-            else
+            else if (stk->data[i] != CANARY)
                 fprintf(file, "  [%zd]: %lg (POIZON)\n", i, stk->data[i]);
+            else 
+                fprintf(file, "! [%zd]: %lg (CANARY)\n", i, stk->data[i]);
         }
     }
     else
@@ -291,7 +318,13 @@ const char* GetErrorStr (ErrorsCode err)
 
     case ERROR_NO_MEMORY:
         return "Memory allocation error";
-    
+
+    case CANARY_ERROR:
+        return "Canary protection was broken";
+
+    case STACK_UNDERFLOW:
+        return "Attempt to remove an element from an empty stack";
+
     default:
         assert(0);
         break;

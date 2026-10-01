@@ -5902,3 +5902,473 @@ double data[20] (0064FEAC) {
 * [18]: 18.000000
   [19]: 1.#QNAN (POIZON)
 }
+
+===== OKAK (STACK DUMP) =====
+
+Date: Sep 29 2026, time: 21:46:24
+File name:  [main.cpp]
+Stack name: [stk1]
+Data type:  [double]
+Created in: [main] (line 67)
+
+! Number of error: [#4] -> (Capacity of data is negative)
+
+Capacity: 0
+Size:     0
+
+* Data elements:
+double data[0] (0064FEAC) {
+Null data, there are NO elements
+}
+
+===== OKAK (STACK DUMP) =====
+
+Date: Sep 29 2026, time: 21:46:44
+File name:  [main.cpp]
+Stack name: [stk1]
+Data type:  [double]
+Created in: [main] (line 67)
+
+! Number of error: [#0] -> (Stack is okey! Good job my bruh :))
+
+Capacity: 20
+Size:     19
+
+* Data elements:
+double data[20] (0064FEAC) {
+* [0]: 0.000000
+* [1]: 1.000000
+* [2]: 2.000000
+* [3]: 3.000000
+* [4]: 4.000000
+* [5]: 5.000000
+* [6]: 6.000000
+* [7]: 7.000000
+* [8]: 8.000000
+* [9]: 9.000000
+* [10]: 10.000000
+* [11]: 11.000000
+* [12]: 12.000000
+* [13]: 13.000000
+* [14]: 14.000000
+* [15]: 15.000000
+* [16]: 16.000000
+* [17]: 17.000000
+* [18]: 18.000000
+  [19]: 1.#QNAN (POIZON)
+}
+
+===== OKAK (STACK DUMP) =====
+
+Date: Oct  1 2026, time: 19:46:14
+File name:  [main.cpp]
+Stack name: [stk1]
+Data type:  [double]
+Created in: [main] (line 69)
+
+! Number of error: [#5] -> (The pointer (size) to an element larger than the data capacity)
+
+Capacity: 10
+Size:     11
+
+* Data elements:
+double data[10] (0064FEAC) {
+* [0]: 12246509.000000
+* [1]: 0.000000
+* [2]: 1.000000
+* [3]: 2.000000
+* [4]: 3.000000
+* [5]: 4.000000
+* [6]: 5.000000
+* [7]: 6.000000
+* [8]: 7.000000
+* [9]: 8.000000
+}
+
+===== OKAK (STACK DUMP) =====
+
+Date: Oct  1 2026, time: 19:48:20
+File name:  [main.cpp]
+Stack name: [stk1]
+Data type:  [double]
+Created in: [main] (line 69)
+
+! Number of error: [#8] -> (Canary protection was broken)
+
+Capacity: 5
+Size:     1
+
+* Data elements:
+double data[5] (0064FEAC) {
+* [0]: 12246509.000000
+  [1]: 1.#QNAN (POIZON)
+  [2]: 1.#QNAN (POIZON)
+  [3]: 1.#QNAN (POIZON)
+* [4]: 12246509.000000
+}
+
+===== OKAK (STACK DUMP) =====
+
+Date: Oct  1 2026, time: 19:49:22
+File name:  [main.cpp]
+Stack name: [stk1]
+Data type:  [double]
+Created in: [main] (line 69)
+
+! Number of error: [#6] -> (The array contains extraneous (random) numbers)
+
+Capacity: 5
+Size:     1
+
+* Data elements:
+double data[5] (0064FEAC) {
+* [0]: 12246509.000000
+  [1]: 1.#QNAN (POIZON)
+  [2]: 1.#QNAN (POIZON)
+  [3]: 1.#QNAN (POIZON)
+* [4]: 12246509.000000
+}
+
+===== OKAK (STACK DUMP) =====
+
+Date: Oct  1 2026, time: 19:52:43
+File name:  [main.cpp]
+Stack name: [stk1]
+Data type:  [double]
+Created in: [main] (line 69)
+
+! Number of error: [#8] -> (Canary protection was broken)
+
+Capacity: 5
+Size:     5
+
+* Data elements:
+double data[5] (0064FEAC) {
+* [0]: 12246509.000000
+* [1]: 0.000000
+* [2]: 1.000000
+* [3]: 2.000000
+* [4]: 3.000000
+}
+
+===== OKAK (STACK DUMP) =====
+
+Date: Oct  1 2026, time: 19:52:43
+File name:  [main.cpp]
+Stack name: [stk1]
+Data type:  [double]
+Created in: [main] (line 69)
+
+! Number of error: [#8] -> (Canary protection was broken)
+
+Capacity: 5
+Size:     5
+
+* Data elements:
+double data[5] (0064FEAC) {
+* [0]: 12246509.000000
+* [1]: 0.000000
+* [2]: 1.000000
+* [3]: 2.000000
+* [4]: 3.000000
+}
+
+===== OKAK (STACK DUMP) =====
+
+Date: Oct  1 2026, time: 19:52:43
+File name:  [main.cpp]
+Stack name: [stk1]
+Data type:  [double]
+Created in: [main] (line 69)
+
+! Number of error: [#8] -> (Canary protection was broken)
+
+Capacity: 5
+Size:     5
+
+* Data elements:
+double data[5] (0064FEAC) {
+* [0]: 12246509.000000
+* [1]: 0.000000
+* [2]: 1.000000
+* [3]: 2.000000
+* [4]: 3.000000
+}
+
+===== OKAK (STACK DUMP) =====
+
+Date: Oct  1 2026, time: 20:04:52
+File name:  [main.cpp]
+Stack name: [stk1]
+Data type:  [double]
+Created in: [main] (line 71)
+
+! Number of error: [#8] -> (Canary protection was broken)
+
+Capacity: 5
+Size:     5
+
+* Data elements:
+double data[5] (0064FEAC) {
+* [0]: 12246509.000000
+* [1]: 0.000000
+* [2]: 1.000000
+* [3]: 2.000000
+* [4]: 3.000000
+}
+
+===== OKAK (STACK DUMP) =====
+
+Date: Oct  1 2026, time: 20:17:12
+File name:  [main.cpp]
+Stack name: [stk1]
+Data type:  [double]
+Created in: [main] (line 71)
+
+! Number of error: [#0] -> (Stack is okey! Good job my bruh :))
+
+Capacity: 20
+Size:     20
+
+* Data elements:
+double data[20] (0064FEA8) {
+* [0]: 12246509.000000
+* [1]: 0.000000
+* [2]: 1.000000
+* [3]: 2.000000
+* [4]: 3.000000
+* [5]: 4.000000
+* [6]: 5.000000
+* [7]: 6.000000
+* [8]: 7.000000
+* [9]: 8.000000
+* [10]: 9.000000
+* [11]: 10.000000
+* [12]: 11.000000
+* [13]: 12.000000
+* [14]: 13.000000
+* [15]: 14.000000
+* [16]: 15.000000
+* [17]: 16.000000
+* [18]: 17.000000
+* [19]: 18.000000
+}
+
+===== OKAK (STACK DUMP) =====
+
+Date: Oct  1 2026, time: 20:18:08
+File name:  [main.cpp]
+Stack name: [stk1]
+Data type:  [double]
+Created in: [main] (line 71)
+
+! Number of error: [#0] -> (Stack is okey! Good job my bruh :))
+
+Capacity: 20
+Size:     20
+
+* Data elements:
+double data[20] (0064FEA8) {
+* [0]: 12246509.000000
+* [1]: 0.000000
+* [2]: 1.000000
+* [3]: 2.000000
+* [4]: 3.000000
+* [5]: 4.000000
+* [6]: 5.000000
+* [7]: 6.000000
+* [8]: 7.000000
+* [9]: 8.000000
+* [10]: 9.000000
+* [11]: 10.000000
+* [12]: 11.000000
+* [13]: 12.000000
+* [14]: 13.000000
+* [15]: 14.000000
+* [16]: 15.000000
+* [17]: 16.000000
+* [18]: 17.000000
+* [19]: 18.000000
+  [20]: 1.#QNAN (POIZON)
+* [21]: 12246509.000000
+}
+
+===== OKAK (STACK DUMP) =====
+
+Date: Oct  1 2026, time: 20:23:04
+File name:  [main.cpp]
+Stack name: [stk1]
+Data type:  [double]
+Created in: [main] (line 71)
+
+! Number of error: [#0] -> (Stack is okey! Good job my bruh :))
+
+Capacity:      20
+Real capacity: 22
+Size:          20
+
+* Data elements:
+double data[20] (0064FEA8) {
+! [0]: A0000000 (CANARY)
+* [1]: 0.000000
+* [2]: 1.000000
+* [3]: 2.000000
+* [4]: 3.000000
+* [5]: 4.000000
+* [6]: 5.000000
+* [7]: 6.000000
+* [8]: 7.000000
+* [9]: 8.000000
+* [10]: 9.000000
+* [11]: 10.000000
+* [12]: 11.000000
+* [13]: 12.000000
+* [14]: 13.000000
+* [15]: 14.000000
+* [16]: 15.000000
+* [17]: 16.000000
+* [18]: 17.000000
+* [19]: 18.000000
+  [20]: 1.#QNAN (POIZON)
+! [21]: A0000000 (CANARY)
+}
+
+===== OKAK (STACK DUMP) =====
+
+Date: Oct  1 2026, time: 20:26:40
+File name:  [main.cpp]
+Stack name: [stk1]
+Data type:  [double]
+Created in: [main] (line 71)
+
+! Number of error: [#0] -> (Stack is okey! Good job my bruh :))
+
+Capacity:      20
+Real capacity: 22
+Size:          20
+
+* Data elements:
+double data[20] (0064FEA8) {
+! [0]: 54411744 (CANARY)
+* [1]: 0.000000
+* [2]: 1.000000
+* [3]: 2.000000
+* [4]: 3.000000
+* [5]: 4.000000
+* [6]: 5.000000
+* [7]: 6.000000
+* [8]: 7.000000
+* [9]: 8.000000
+* [10]: 9.000000
+* [11]: 10.000000
+* [12]: 11.000000
+* [13]: 12.000000
+* [14]: 13.000000
+* [15]: 14.000000
+* [16]: 15.000000
+* [17]: 16.000000
+* [18]: 17.000000
+* [19]: 18.000000
+  [20]: 1.#QNAN (POIZON)
+! [21]: 54411744 (CANARY)
+}
+
+===== OKAK (STACK DUMP) =====
+
+Date: Oct  1 2026, time: 20:27:11
+File name:  [main.cpp]
+Stack name: [stk1]
+Data type:  [double]
+Created in: [main] (line 71)
+
+! Number of error: [#0] -> (Stack is okey! Good job my bruh :))
+
+Capacity:      20
+Real capacity: 22
+Size:          20
+
+* Data elements:
+double data[20] (0064FEA8) {
+! [0]: -3.14159 (CANARY)
+* [1]: 0.000000
+* [2]: 1.000000
+* [3]: 2.000000
+* [4]: 3.000000
+* [5]: 4.000000
+* [6]: 5.000000
+* [7]: 6.000000
+* [8]: 7.000000
+* [9]: 8.000000
+* [10]: 9.000000
+* [11]: 10.000000
+* [12]: 11.000000
+* [13]: 12.000000
+* [14]: 13.000000
+* [15]: 14.000000
+* [16]: 15.000000
+* [17]: 16.000000
+* [18]: 17.000000
+* [19]: 18.000000
+  [20]: 1.#QNAN (POIZON)
+! [21]: -3.14159 (CANARY)
+}
+
+===== OKAK (STACK DUMP) =====
+
+Date: Oct  1 2026, time: 20:48:23
+File name:  [main.cpp]
+Stack name: [stk1]
+Data type:  [double]
+Created in: [main] (line 72)
+
+! Number of error: [#0] -> (Stack is okey! Good job my bruh :))
+
+Capacity:      40
+Real capacity: 42
+Size:          20
+
+* Data elements:
+double data[40] (0064FEA8) {
+! [0]: -3.14159 (CANARY)
+* [1]: 0.000000
+* [2]: 1.000000
+* [3]: 2.000000
+* [4]: 3.000000
+* [5]: 4.000000
+* [6]: 5.000000
+* [7]: 6.000000
+* [8]: 7.000000
+* [9]: 8.000000
+* [10]: 9.000000
+* [11]: 10.000000
+* [12]: 11.000000
+* [13]: 12.000000
+* [14]: 13.000000
+* [15]: 14.000000
+* [16]: 15.000000
+* [17]: 16.000000
+* [18]: 17.000000
+* [19]: 18.000000
+  [20]: 1.#QNAN (POIZON)
+  [21]: 1.#QNAN (POIZON)
+  [22]: 1.#QNAN (POIZON)
+  [23]: 1.#QNAN (POIZON)
+  [24]: 1.#QNAN (POIZON)
+  [25]: 1.#QNAN (POIZON)
+  [26]: 1.#QNAN (POIZON)
+  [27]: 1.#QNAN (POIZON)
+  [28]: 1.#QNAN (POIZON)
+  [29]: 1.#QNAN (POIZON)
+  [30]: 1.#QNAN (POIZON)
+  [31]: 1.#QNAN (POIZON)
+  [32]: 1.#QNAN (POIZON)
+  [33]: 1.#QNAN (POIZON)
+  [34]: 1.#QNAN (POIZON)
+  [35]: 1.#QNAN (POIZON)
+  [36]: 1.#QNAN (POIZON)
+  [37]: 1.#QNAN (POIZON)
+  [38]: 1.#QNAN (POIZON)
+  [39]: 1.#QNAN (POIZON)
+  [40]: 1.#QNAN (POIZON)
+! [41]: -3.14159 (CANARY)
+}
