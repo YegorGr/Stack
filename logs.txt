@@ -1,0 +1,435 @@
+
+
+===== OKAK (STACK DUMP) =====
+
+Date: Oct  1 2026, time: 21:44:44
+File name:  [main.cpp]
+Stack name: [stk1]
+Data type:  [double]
+Created in: [main] (line 18)
+
+! Number of error: [#0] -> (Stack is okey! Good job my bruh :))
+
+Capacity:      40
+Real capacity: 42
+Size:          20
+
+* Data elements:
+double data[40] (0064FEA4) {
+! [0]: -3.14159 (CANARY)
+* [1]: 0.000000
+* [2]: 1.000000
+* [3]: 2.000000
+* [4]: 3.000000
+* [5]: 4.000000
+* [6]: 5.000000
+* [7]: 6.000000
+* [8]: 7.000000
+* [9]: 8.000000
+* [10]: 9.000000
+* [11]: 10.000000
+* [12]: 11.000000
+* [13]: 12.000000
+* [14]: 13.000000
+* [15]: 14.000000
+* [16]: 15.000000
+* [17]: 16.000000
+* [18]: 17.000000
+* [19]: 18.000000
+  [20]: 1.#QNAN (POIZON)
+  [21]: 1.#QNAN (POIZON)
+  [22]: 1.#QNAN (POIZON)
+  [23]: 1.#QNAN (POIZON)
+  [24]: 1.#QNAN (POIZON)
+  [25]: 1.#QNAN (POIZON)
+  [26]: 1.#QNAN (POIZON)
+  [27]: 1.#QNAN (POIZON)
+  [28]: 1.#QNAN (POIZON)
+  [29]: 1.#QNAN (POIZON)
+  [30]: 1.#QNAN (POIZON)
+  [31]: 1.#QNAN (POIZON)
+  [32]: 1.#QNAN (POIZON)
+  [33]: 1.#QNAN (POIZON)
+  [34]: 1.#QNAN (POIZON)
+  [35]: 1.#QNAN (POIZON)
+  [36]: 1.#QNAN (POIZON)
+  [37]: 1.#QNAN (POIZON)
+  [38]: 1.#QNAN (POIZON)
+  [39]: 1.#QNAN (POIZON)
+  [40]: 1.#QNAN (POIZON)
+! [41]: -3.14159 (CANARY)
+}
+
+===== OKAK (STACK DUMP) =====
+
+Date: Oct  1 2026, time: 21:46:52
+File name:  [main.cpp]
+Stack name: [stk1]
+Data type:  [double]
+Created in: [main] (line 18)
+
+! Number of error: [#0] -> (Stack is okey! Good job my bruh :))
+
+Capacity:      40
+Real capacity: 42
+Size:          20
+
+* Data elements:
+double data[40] (0064FEA4) {
+! [0]: -3.14159 (CANARY)
+* [1]: 0.000000
+* [2]: 1.000000
+* [3]: 2.000000
+* [4]: 3.000000
+* [5]: 4.000000
+* [6]: 5.000000
+* [7]: 6.000000
+* [8]: 7.000000
+* [9]: 8.000000
+* [10]: 9.000000
+* [11]: 10.000000
+* [12]: 11.000000
+* [13]: 12.000000
+* [14]: 13.000000
+* [15]: 14.000000
+* [16]: 15.000000
+* [17]: 16.000000
+* [18]: 17.000000
+* [19]: 18.000000
+  [20]: 1.#QNAN (POIZON)
+  [21]: 1.#QNAN (POIZON)
+  [22]: 1.#QNAN (POIZON)
+  [23]: 1.#QNAN (POIZON)
+  [24]: 1.#QNAN (POIZON)
+  [25]: 1.#QNAN (POIZON)
+  [26]: 1.#QNAN (POIZON)
+  [27]: 1.#QNAN (POIZON)
+  [28]: 1.#QNAN (POIZON)
+  [29]: 1.#QNAN (POIZON)
+  [30]: 1.#QNAN (POIZON)
+  [31]: 1.#QNAN (POIZON)
+  [32]: 1.#QNAN (POIZON)
+  [33]: 1.#QNAN (POIZON)
+  [34]: 1.#QNAN (POIZON)
+  [35]: 1.#QNAN (POIZON)
+  [36]: 1.#QNAN (POIZON)
+  [37]: 1.#QNAN (POIZON)
+  [38]: 1.#QNAN (POIZON)
+  [39]: 1.#QNAN (POIZON)
+  [40]: 1.#QNAN (POIZON)
+! [41]: -3.14159 (CANARY)
+}
+
+===== OKAK (STACK DUMP) =====
+
+Date: Oct  1 2026, time: 21:57:28
+File name:  [main.cpp]
+Stack name: [stk1]
+Data type:  [double]
+Created in: [main] (line 18)
+
+! Number of error: [#0] -> (Stack is okey! Good job my bruh :))
+
+Capacity:      40
+Real capacity: 42
+Size:          20
+
+Left stack canary: 12648430 - all is good
+Left stack canary: 14343661 - all is good
+* Data elements:
+double data[40] (0064FEA4) {
+! [0]: -3.14159 (CANARY)
+* [1]: 0.000000
+* [2]: 1.000000
+* [3]: 2.000000
+* [4]: 3.000000
+* [5]: 4.000000
+* [6]: 5.000000
+* [7]: 6.000000
+* [8]: 7.000000
+* [9]: 8.000000
+* [10]: 9.000000
+* [11]: 10.000000
+* [12]: 11.000000
+* [13]: 12.000000
+* [14]: 13.000000
+* [15]: 14.000000
+* [16]: 15.000000
+* [17]: 16.000000
+* [18]: 17.000000
+* [19]: 18.000000
+  [20]: 1.#QNAN (POIZON)
+  [21]: 1.#QNAN (POIZON)
+  [22]: 1.#QNAN (POIZON)
+  [23]: 1.#QNAN (POIZON)
+  [24]: 1.#QNAN (POIZON)
+  [25]: 1.#QNAN (POIZON)
+  [26]: 1.#QNAN (POIZON)
+  [27]: 1.#QNAN (POIZON)
+  [28]: 1.#QNAN (POIZON)
+  [29]: 1.#QNAN (POIZON)
+  [30]: 1.#QNAN (POIZON)
+  [31]: 1.#QNAN (POIZON)
+  [32]: 1.#QNAN (POIZON)
+  [33]: 1.#QNAN (POIZON)
+  [34]: 1.#QNAN (POIZON)
+  [35]: 1.#QNAN (POIZON)
+  [36]: 1.#QNAN (POIZON)
+  [37]: 1.#QNAN (POIZON)
+  [38]: 1.#QNAN (POIZON)
+  [39]: 1.#QNAN (POIZON)
+  [40]: 1.#QNAN (POIZON)
+! [41]: -3.14159 (CANARY)
+}
+
+===== OKAK (STACK DUMP) =====
+
+Date: Oct  1 2026, time: 21:57:48
+File name:  [main.cpp]
+Stack name: [stk1]
+Data type:  [double]
+Created in: [main] (line 18)
+
+! Number of error: [#0] -> (Stack is okey! Good job my bruh :))
+
+Capacity:      40
+Real capacity: 42
+Size:          20
+
+Left stack canary: 12648430 - all is good
+Left stack canary: 14343661 - all is good
+
+* Data elements:
+double data[40] (0064FEA4) {
+! [0]: -3.14159 (CANARY)
+* [1]: 0.000000
+* [2]: 1.000000
+* [3]: 2.000000
+* [4]: 3.000000
+* [5]: 4.000000
+* [6]: 5.000000
+* [7]: 6.000000
+* [8]: 7.000000
+* [9]: 8.000000
+* [10]: 9.000000
+* [11]: 10.000000
+* [12]: 11.000000
+* [13]: 12.000000
+* [14]: 13.000000
+* [15]: 14.000000
+* [16]: 15.000000
+* [17]: 16.000000
+* [18]: 17.000000
+* [19]: 18.000000
+  [20]: 1.#QNAN (POIZON)
+  [21]: 1.#QNAN (POIZON)
+  [22]: 1.#QNAN (POIZON)
+  [23]: 1.#QNAN (POIZON)
+  [24]: 1.#QNAN (POIZON)
+  [25]: 1.#QNAN (POIZON)
+  [26]: 1.#QNAN (POIZON)
+  [27]: 1.#QNAN (POIZON)
+  [28]: 1.#QNAN (POIZON)
+  [29]: 1.#QNAN (POIZON)
+  [30]: 1.#QNAN (POIZON)
+  [31]: 1.#QNAN (POIZON)
+  [32]: 1.#QNAN (POIZON)
+  [33]: 1.#QNAN (POIZON)
+  [34]: 1.#QNAN (POIZON)
+  [35]: 1.#QNAN (POIZON)
+  [36]: 1.#QNAN (POIZON)
+  [37]: 1.#QNAN (POIZON)
+  [38]: 1.#QNAN (POIZON)
+  [39]: 1.#QNAN (POIZON)
+  [40]: 1.#QNAN (POIZON)
+! [41]: -3.14159 (CANARY)
+}
+
+===== OKAK (STACK DUMP) =====
+
+Date: Oct  1 2026, time: 21:58:30
+File name:  [main.cpp]
+Stack name: [stk1]
+Data type:  [double]
+Created in: [main] (line 18)
+
+! Number of error: [#0] -> (Stack is okey! Good job my bruh :))
+
+Capacity:      40
+Real capacity: 42
+Size:          20
+
+Left stack canary: C0FFEE - all is good
+Left stack canary: DADDED - all is good
+
+* Data elements:
+double data[40] (0064FEA4) {
+! [0]: -3.14159 (CANARY)
+* [1]: 0.000000
+* [2]: 1.000000
+* [3]: 2.000000
+* [4]: 3.000000
+* [5]: 4.000000
+* [6]: 5.000000
+* [7]: 6.000000
+* [8]: 7.000000
+* [9]: 8.000000
+* [10]: 9.000000
+* [11]: 10.000000
+* [12]: 11.000000
+* [13]: 12.000000
+* [14]: 13.000000
+* [15]: 14.000000
+* [16]: 15.000000
+* [17]: 16.000000
+* [18]: 17.000000
+* [19]: 18.000000
+  [20]: 1.#QNAN (POIZON)
+  [21]: 1.#QNAN (POIZON)
+  [22]: 1.#QNAN (POIZON)
+  [23]: 1.#QNAN (POIZON)
+  [24]: 1.#QNAN (POIZON)
+  [25]: 1.#QNAN (POIZON)
+  [26]: 1.#QNAN (POIZON)
+  [27]: 1.#QNAN (POIZON)
+  [28]: 1.#QNAN (POIZON)
+  [29]: 1.#QNAN (POIZON)
+  [30]: 1.#QNAN (POIZON)
+  [31]: 1.#QNAN (POIZON)
+  [32]: 1.#QNAN (POIZON)
+  [33]: 1.#QNAN (POIZON)
+  [34]: 1.#QNAN (POIZON)
+  [35]: 1.#QNAN (POIZON)
+  [36]: 1.#QNAN (POIZON)
+  [37]: 1.#QNAN (POIZON)
+  [38]: 1.#QNAN (POIZON)
+  [39]: 1.#QNAN (POIZON)
+  [40]: 1.#QNAN (POIZON)
+! [41]: -3.14159 (CANARY)
+}
+
+===== OKAK (STACK DUMP) =====
+
+Date: Oct  1 2026, time: 21:59:10
+File name:  [main.cpp]
+Stack name: [stk1]
+Data type:  [double]
+Created in: [main] (line 18)
+
+! Number of error: [#0] -> (Stack is okey! Good job my bruh :))
+
+Capacity:      40
+Real capacity: 42
+Size:          20
+
+Left stack canary: [C0FFEE] - all is good
+Left stack canary: [DADDED] - all is good
+
+* Data elements:
+double data[40] (0064FEA4) {
+! [0]: -3.14159 (CANARY)
+* [1]: 0.000000
+* [2]: 1.000000
+* [3]: 2.000000
+* [4]: 3.000000
+* [5]: 4.000000
+* [6]: 5.000000
+* [7]: 6.000000
+* [8]: 7.000000
+* [9]: 8.000000
+* [10]: 9.000000
+* [11]: 10.000000
+* [12]: 11.000000
+* [13]: 12.000000
+* [14]: 13.000000
+* [15]: 14.000000
+* [16]: 15.000000
+* [17]: 16.000000
+* [18]: 17.000000
+* [19]: 18.000000
+  [20]: 1.#QNAN (POIZON)
+  [21]: 1.#QNAN (POIZON)
+  [22]: 1.#QNAN (POIZON)
+  [23]: 1.#QNAN (POIZON)
+  [24]: 1.#QNAN (POIZON)
+  [25]: 1.#QNAN (POIZON)
+  [26]: 1.#QNAN (POIZON)
+  [27]: 1.#QNAN (POIZON)
+  [28]: 1.#QNAN (POIZON)
+  [29]: 1.#QNAN (POIZON)
+  [30]: 1.#QNAN (POIZON)
+  [31]: 1.#QNAN (POIZON)
+  [32]: 1.#QNAN (POIZON)
+  [33]: 1.#QNAN (POIZON)
+  [34]: 1.#QNAN (POIZON)
+  [35]: 1.#QNAN (POIZON)
+  [36]: 1.#QNAN (POIZON)
+  [37]: 1.#QNAN (POIZON)
+  [38]: 1.#QNAN (POIZON)
+  [39]: 1.#QNAN (POIZON)
+  [40]: 1.#QNAN (POIZON)
+! [41]: -3.14159 (CANARY)
+}
+
+===== OKAK (STACK DUMP) =====
+
+Date: Oct  1 2026, time: 22:00:03
+File name:  [main.cpp]
+Stack name: [stk1]
+Data type:  [double]
+Created in: [main] (line 18)
+
+! Number of error: [#0] -> (Stack is okey! Good job my bruh :))
+
+Capacity:      40
+Real capacity: 42
+Size:          20
+
+Left stack canary: [C0FFEE] - all is good
+Right stack canary: [DADDED] - all is good
+
+* Data elements:
+double data[40] (0064FEA4) {
+! [0]: -3.14159 (CANARY)
+* [1]: 0.000000
+* [2]: 1.000000
+* [3]: 2.000000
+* [4]: 3.000000
+* [5]: 4.000000
+* [6]: 5.000000
+* [7]: 6.000000
+* [8]: 7.000000
+* [9]: 8.000000
+* [10]: 9.000000
+* [11]: 10.000000
+* [12]: 11.000000
+* [13]: 12.000000
+* [14]: 13.000000
+* [15]: 14.000000
+* [16]: 15.000000
+* [17]: 16.000000
+* [18]: 17.000000
+* [19]: 18.000000
+  [20]: 1.#QNAN (POIZON)
+  [21]: 1.#QNAN (POIZON)
+  [22]: 1.#QNAN (POIZON)
+  [23]: 1.#QNAN (POIZON)
+  [24]: 1.#QNAN (POIZON)
+  [25]: 1.#QNAN (POIZON)
+  [26]: 1.#QNAN (POIZON)
+  [27]: 1.#QNAN (POIZON)
+  [28]: 1.#QNAN (POIZON)
+  [29]: 1.#QNAN (POIZON)
+  [30]: 1.#QNAN (POIZON)
+  [31]: 1.#QNAN (POIZON)
+  [32]: 1.#QNAN (POIZON)
+  [33]: 1.#QNAN (POIZON)
+  [34]: 1.#QNAN (POIZON)
+  [35]: 1.#QNAN (POIZON)
+  [36]: 1.#QNAN (POIZON)
+  [37]: 1.#QNAN (POIZON)
+  [38]: 1.#QNAN (POIZON)
+  [39]: 1.#QNAN (POIZON)
+  [40]: 1.#QNAN (POIZON)
+! [41]: -3.14159 (CANARY)
+}
