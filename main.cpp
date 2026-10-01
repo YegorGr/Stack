@@ -5,68 +5,12 @@
 #include <math.h>
 #include <string.h>
 
-#define POIZON NAN
-#define CANARY -3.1415926535
-
-#define TYPE_STK double
-#define TYPE_TO_STR(x) #x
-#define STR_ELEM(x) TYPE_TO_STR(x)
-
-typedef TYPE_STK stackelem_t;
-
-enum ErrorsCode {
-    IS_OK = 0,
-    PTR_STK_NULL,
-    PTR_DATA_NULL,
-    NEGATIVE_SIZE,
-    NEGATIVE_CAPACITY,
-    SIZE_BIGGER_CAPACITY,
-    ARRAY_CRASH,
-    ERROR_NO_MEMORY,
-    STACK_UNDERFLOW,
-    CANARY_ERROR
-}; 
-
-#define ON_DEBUG
 #include "Stack.h"
-
-struct stack_t {
-    stackelem_t* data;
-    ssize_t      size;
-    ssize_t      capacity;
-    ssize_t      real_capacity;
-
-#ifdef STACK_DEBUG
-    const char*  file;
-    const char*  name_stk;
-    const char*  name_function;
-    int          line;
-    const char*  date;
-    const char*  time;
-#endif
-};
-
-ErrorsCode  StackInit   (stack_t* stk, ssize_t capacity
-                         STACK_DEBUG(, const char* file, const char* name_stk,
-                         const char* name_function, int line, const char* date, const char* time));
-ErrorsCode  StackPush   (stack_t* stk, stackelem_t value);
-stackelem_t StackPop    (stack_t* stk, ErrorsCode* err);
-ErrorsCode  StackOk     (stack_t* stk);
-
-void        StackDump   (stack_t* stk, ErrorsCode err);
-const char* GetErrorStr (ErrorsCode err);
-
-ErrorsCode  ResizeUp    (stack_t* stk);
-ErrorsCode  ResizeDown  (stack_t* stk);
-
-void        StackDestroy(stack_t* stk);
 
 int main()
 {
     stack_t stk1 = {};
-
     ssize_t capacity = 5;
-    double number    = 3.1415926535;
 
     ErrorsCode err = StackInit(&stk1, capacity STACK_DEBUG(, __FILE__, "stk1", __FUNCTION__, 
                                                             __LINE__, __DATE__, __TIME__));
@@ -82,9 +26,8 @@ int main()
     for (int i = 0; i < 1000; i++)
         StackPush(&stk1, (double) i);
     
-    double num = 0;
     for (int i = 0; i < 981; i++)
-        num = StackPop(&stk1, &err);
+        StackPop(&stk1, &err);
 
     StackDump(&stk1, err);
 
@@ -128,6 +71,9 @@ ErrorsCode  StackInit  (stack_t* stk, ssize_t capacity STACK_DEBUG(, const char*
 
     stk->data[0]                      = CANARY;
     stk->data[stk->real_capacity - 1] = CANARY;
+
+    stk->left_canary  = LEFT_CANARY_STK;
+    stk->right_canary = RIGHT_CANARY_STK;
 
     ErrorsCode err = StackOk(stk);
     if (err != IS_OK) 
@@ -191,7 +137,10 @@ ErrorsCode StackOk(stack_t* stk)
     if (stk->size > stk->capacity)
         return SIZE_BIGGER_CAPACITY;
     
-    if (stk->data[0] != CANARY || stk->data[stk->real_capacity - 1] != CANARY)
+    if (!IsCanary(stk->data[0], CANARY) || !IsCanary(stk->data[stk->real_capacity - 1], CANARY))
+        return CANARY_ERROR;
+
+    if (stk->left_canary != LEFT_CANARY_STK || stk->right_canary != RIGHT_CANARY_STK)
         return CANARY_ERROR;
     
     for (int i = 0; i < (stk->real_capacity - 1 - stk->size); i++)
@@ -268,19 +217,31 @@ void StackDump (stack_t* stk, ErrorsCode err)
     fprintf(file, "Real capacity: %d\n",   stk->real_capacity);
     fprintf(file, "Size:          %d\n\n", stk->size);
 
+    if (stk->left_canary == LEFT_CANARY_STK)
+        fprintf(file, "Left stack canary: [%X] - all is good\n", stk->left_canary);
+    else
+        fprintf(file, "Left stack canary: [%X] - real canary should be: [%X]\n", 
+                stk->left_canary, LEFT_CANARY_STK);
+    
+    if (stk->right_canary == RIGHT_CANARY_STK)
+        fprintf(file, "Right stack canary: [%X] - all is good\n\n", stk->right_canary);
+    else
+        fprintf(file, "Right stack canary: [%X] - real canary should be: [%X]\n\n", 
+                stk->right_canary, RIGHT_CANARY_STK);
+
     fprintf(file, "* Data elements:\n");
-    fprintf(file, "%s data[%d] (%p) {\n", STR_ELEM(TYPE_STK), stk->capacity, &stk->data);
+    fprintf(file, "%s data[%d] (%p) {\n", STR_ELEM(TYPE_STK), stk->real_capacity, &stk->data);
 
     if (stk->data != NULL)
     {
         for (ssize_t i = 0; i < stk->real_capacity; i++)
         {
-            if (!isnan(stk->data[i]) && stk->data[i] != CANARY)
-                fprintf(file, "* [%zd]: %lf\n", i, stk->data[i]);
-            else if (stk->data[i] != CANARY)
-                fprintf(file, "  [%zd]: %lg (POIZON)\n", i, stk->data[i]);
+            if (!isnan(stk->data[i]) && !IsCanary(stk->data[i], CANARY))
+                fprintf(file, "* [%d]: %lf\n", i, stk->data[i]);
+            else if (IsCanary(stk->data[i], CANARY))
+                fprintf(file, "  [%d]: %lg (POIZON)\n", i, stk->data[i]);
             else 
-                fprintf(file, "! [%zd]: %lg (CANARY)\n", i, stk->data[i]);
+                fprintf(file, "! [%d]: %lg (CANARY)\n", i, stk->data[i]);
         }
     }
     else
@@ -333,8 +294,10 @@ const char* GetErrorStr (ErrorsCode err)
 
 void StackDestroy (stack_t* stk)
 {
-
     if (stk == NULL) 
+        return;
+
+    if (stk->capacity == -1 || stk->size == -1)
         return;
 
     if (stk->data != NULL) 
@@ -356,4 +319,12 @@ void StackDestroy (stack_t* stk)
     stk->date          = NULL;
     stk->time          = NULL;
 #endif
+}
+
+int IsCanary (stackelem_t canary_real, stackelem_t canary_ver)
+{
+    if (fabs(canary_real - canary_ver) < EPSILON)
+        return 1;
+    
+    return 0;
 }
