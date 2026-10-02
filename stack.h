@@ -1,4 +1,4 @@
-#define POIZON NAN
+#define POISON NAN
 #define CANARY -3.1415926535
 #define LEFT_CANARY_STK 0xC0FFEE
 #define RIGHT_CANARY_STK 0xDADDED
@@ -22,7 +22,8 @@ enum ErrorsCode {
     ARRAY_CRASH,
     ERROR_NO_MEMORY,
     STACK_UNDERFLOW,
-    CANARY_ERROR
+    CANARY_ERROR,
+    HASH_ERROR
 }; 
 
 #ifdef ON_DEBUG
@@ -57,6 +58,7 @@ struct stack_t {
     int          line;
     const char*  date;
     const char*  time;
+    int          hash;
 #endif
 
     canary_t     right_canary;
@@ -78,3 +80,4 @@ ErrorsCode  ResizeDown  (stack_t* stk);
 void        StackDestroy(stack_t* stk);
 
 int         IsCanary    (stackelem_t canary_real, stackelem_t canary_ver);
+ssize_t     CalcHash    (stack_t* stk);
