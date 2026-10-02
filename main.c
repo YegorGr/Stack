@@ -29,6 +29,9 @@ int main()
     for (int i = 0; i < 981; i++)
         StackPop(&stk1, &err);
 
+    double test = StackPop(&stk1, &err);
+    printf("%lf", test);
+
     StackDump(&stk1, err);
 
     assert_ok(&stk1);
@@ -40,7 +43,7 @@ int main()
     return 0;
 }
 
-ErrorsCode  StackInit  (stack_t* stk, ssize_t capacity STACK_DEBUG(, const char* file, const char* name_stk,
+ErrorsCode StackInit (stack_t* stk, ssize_t capacity STACK_DEBUG(, const char* file, const char* name_stk,
                          const char* name_function, int line, const char* date, const char* time))
 {
     assert(stk);
@@ -67,7 +70,7 @@ ErrorsCode  StackInit  (stack_t* stk, ssize_t capacity STACK_DEBUG(, const char*
     stk->real_capacity = capacity + 2;
 
     for (ssize_t i = 1; i < stk->real_capacity - 1; i++)
-        stk->data[i] = POIZON;
+        stk->data[i] = POISON;
 
     stk->data[0]                      = CANARY;
     stk->data[stk->real_capacity - 1] = CANARY;
@@ -75,9 +78,11 @@ ErrorsCode  StackInit  (stack_t* stk, ssize_t capacity STACK_DEBUG(, const char*
     stk->left_canary  = LEFT_CANARY_STK;
     stk->right_canary = RIGHT_CANARY_STK;
 
-    ErrorsCode err = StackOk(stk);
-    if (err != IS_OK) 
-        return err; 
+#ifdef ON_DEBUG
+    stk->hash = CalcHash(stk);
+#endif
+
+    assert_ok(stk);
     
     return IS_OK;
 }
@@ -91,6 +96,10 @@ ErrorsCode StackPush (stack_t* stk, stackelem_t value)
 
     stk->data[stk->size++] = value;
 
+#ifdef ON_DEBUG
+    stk->hash = CalcHash(stk);
+#endif
+
     assert_ok(stk);
 
     return IS_OK;
@@ -103,21 +112,68 @@ stackelem_t StackPop (stack_t* stk, ErrorsCode* err)
     if (stk->size <= 1) 
     {
         *err = STACK_UNDERFLOW;
-        return POIZON;
+        return POISON;
     }
 
-    stackelem_t value = POIZON;
+    stackelem_t value = POISON;
 
     value = stk->data[--stk->size];
 
-    stk->data[stk->size] = POIZON;
+    stk->data[stk->size] = POISON;
 
     if (stk->size * 4 <= stk->capacity)
         *err = ResizeDown(stk);
 
+#ifdef ON_DEBUG
+    stk->hash = CalcHash(stk);
+#endif
+
     assert_ok(stk);
     
     return value;
+}
+
+ErrorsCode ResizeUp (stack_t* stk)
+{
+    assert_ok(stk);
+    
+    ssize_t new_capacity = stk->capacity * 2;
+
+    stackelem_t* new_data = (stackelem_t*) realloc(stk->data, (new_capacity + 2) * sizeof(stackelem_t));
+    
+    if (new_data == NULL)
+        return ERROR_NO_MEMORY;
+    
+    stk->capacity      = new_capacity;
+    stk->data          = new_data;
+    stk->real_capacity = new_capacity + 2;
+
+    for (ssize_t i = stk->size; i < stk->real_capacity - 1; i++)
+        stk->data[i] = POISON;
+
+    stk->data[stk->real_capacity - 1] = CANARY;
+
+    return IS_OK;
+}
+
+ErrorsCode ResizeDown (stack_t* stk)
+{
+    assert_ok(stk);
+
+    ssize_t new_capacity = stk->capacity / 2;
+
+    stackelem_t* new_data = (stackelem_t*) realloc(stk->data, (new_capacity + 2) * sizeof(stackelem_t));
+    
+    if (new_data == NULL)
+        return ERROR_NO_MEMORY;
+    
+    stk->capacity      = new_capacity;
+    stk->data          = new_data;
+    stk->real_capacity = new_capacity + 2;
+
+    stk->data[stk->real_capacity - 1] = CANARY;
+
+    return IS_OK;
 }
 
 ErrorsCode StackOk(stack_t* stk)
@@ -149,48 +205,10 @@ ErrorsCode StackOk(stack_t* stk)
             return ARRAY_CRASH;
     }
 
-    return IS_OK;
-}
-
-ErrorsCode ResizeUp (stack_t* stk)
-{
-    assert_ok(stk);
-    
-    ssize_t new_capacity = stk->capacity * 2;
-
-    stackelem_t* new_data = (stackelem_t*) realloc(stk->data, (new_capacity + 2) * sizeof(stackelem_t));
-    
-    if (new_data == NULL)
-        return ERROR_NO_MEMORY;
-    
-    stk->capacity      = new_capacity;
-    stk->data          = new_data;
-    stk->real_capacity = new_capacity + 2;
-
-    for (ssize_t i = stk->size; i < stk->real_capacity - 1; i++)
-        stk->data[i] = POIZON;
-
-    stk->data[stk->real_capacity - 1] = CANARY;
-
-    return IS_OK;
-}
-
-ErrorsCode ResizeDown (stack_t* stk)
-{
-    assert_ok(stk);
-
-    ssize_t new_capacity = stk->capacity / 2;
-
-    stackelem_t* new_data = (stackelem_t*) realloc(stk->data, (new_capacity + 2) * sizeof(stackelem_t));
-    
-    if (new_data == NULL)
-        return ERROR_NO_MEMORY;
-    
-    stk->capacity      = new_capacity;
-    stk->data          = new_data;
-    stk->real_capacity = new_capacity + 2;
-
-    stk->data[stk->real_capacity - 1] = CANARY;
+#ifdef ON_DEBUG
+    if (stk->hash != CalcHash(stk))
+        return HASH_ERROR;
+#endif
 
     return IS_OK;
 }
@@ -239,9 +257,9 @@ void StackDump (stack_t* stk, ErrorsCode err)
             if (!isnan(stk->data[i]) && !IsCanary(stk->data[i], CANARY))
                 fprintf(file, "* [%d]: %lf\n", i, stk->data[i]);
             else if (IsCanary(stk->data[i], CANARY))
-                fprintf(file, "  [%d]: %lg (POIZON)\n", i, stk->data[i]);
-            else 
                 fprintf(file, "! [%d]: %lg (CANARY)\n", i, stk->data[i]);
+            else 
+                fprintf(file, "  [%d]: %lg (POISON)\n", i, stk->data[i]);
         }
     }
     else
@@ -286,9 +304,11 @@ const char* GetErrorStr (ErrorsCode err)
     case STACK_UNDERFLOW:
         return "Attempt to remove an element from an empty stack";
 
+    case HASH_ERROR:
+        return "Hash was broken";
+
     default:
-        assert(0);
-        break;
+        return "Unknown error";
     }
 }
 
@@ -303,7 +323,7 @@ void StackDestroy (stack_t* stk)
     if (stk->data != NULL) 
     {
         for (ssize_t i = 0; i < stk->capacity; i++)
-            stk->data[i] = POIZON;
+            stk->data[i] = POISON;
         
         free(stk->data);
     }
@@ -318,6 +338,7 @@ void StackDestroy (stack_t* stk)
     stk->line          = -1;
     stk->date          = NULL;
     stk->time          = NULL;
+    stk->hash          = -1;
 #endif
 }
 
@@ -327,4 +348,25 @@ int IsCanary (stackelem_t canary_real, stackelem_t canary_ver)
         return 1;
     
     return 0;
+}
+
+ssize_t CalcHash (stack_t* stk)
+{
+    assert_ok(stk);
+
+    ssize_t hash = 5381;
+
+    hash = hash * 33 + (ssize_t) stk->size;
+    hash = hash * 33 + (ssize_t) stk->capacity;
+    hash = hash * 33 + (ssize_t) stk->real_capacity;
+    hash = hash * 33 + (ssize_t) stk->left_canary;
+    hash = hash * 33 + (ssize_t) stk->right_canary;
+    
+    unsigned char* ptr = (unsigned char*) stk->data;
+    size_t count_bytes = stk->real_capacity * sizeof(stackelem_t);
+
+    for (size_t i = 0; i < count_bytes; i++)
+        hash = hash * 33 + ptr[i];
+
+    return hash;
 }
